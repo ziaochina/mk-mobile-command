@@ -1,0 +1,59 @@
+{
+  "name": "mk-mobile-command",
+  "version": "1.0.0",
+  "description": "mk移动端脚手架",
+  "license": "MIT",
+  "bin": {
+    "mkm": "./bin/mk-mobile-command.js"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {
+    "art-template": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-plugin-add-module-exports": "*",
+    "babel-plugin-transform-decorators-legacy": "*",
+    "babel-plugin-transform-runtime": "*",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*",
+    "babel-preset-react-app": "*",
+    "babel-preset-stage-0": "*",
+    "babel-preset-stage-2": "*",
+    "babel-runtime": "*",
+    "case-sensitive-paths-webpack-plugin": "*",
+    "chalk": "*",
+    "commander": "*",
+    "copy-webpack-plugin": "*",
+    "css-loader": "*",
+    "dotenv": "*",
+    "dotenv-expand": "*",
+    "envinfo": "*",
+    "file-loader": "*",
+    "fs-extra": "*",
+    "hyperquest": "*",
+    "less": "*",
+    "less-loader": "*",
+    "mini-css-extract-plugin": "*",
+    "mk-mobile-sdk": "*",
+    "optimize-css-assets-webpack-plugin": "*",
+    "react": "*",
+    "react-dev-utils": "*",
+    "react-dom": "*",
+    "resolve": "*",
+    "semver": "*",
+    "style-loader": "*",
+    "tar-pack": "*",
+    "uglifyjs-webpack-plugin": "*",
+    "url-loader": "*",
+    "validate-npm-package-name": "*",
+    "webpack": "*",
+    "webpack-cli": "*",
+    "webpack-dev-server": "*",
+    "which": "*"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
+  }
+}
