@@ -58,7 +58,6 @@ function createApp(name) {
 
   const mkJson = {
     "name": appName,
-    "rootApp": appName,
     "title": appName,
     "apiPrefix": "www.www.com",
     "server": {

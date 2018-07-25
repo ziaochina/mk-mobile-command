@@ -1,0 +1,10 @@
+{
+    "name": "welcome",
+    "title": "test",
+    "apiPrefix": "www.www.com",
+    "server": {
+      "proxy": null,
+      "port": 8000
+    },
+    "dependencies": {}
+  }

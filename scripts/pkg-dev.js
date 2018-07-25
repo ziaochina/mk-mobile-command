@@ -67,7 +67,7 @@ measureFileSizesBeforeBuild(paths.appPackageDev)
                 console.log(chalk.yellow('打包警告.\n'));
                 console.log(warnings.join('\n\n'));
             } else {
-                console.log(chalk.green('打包成功.'));
+                console.log(chalk.green(`打包成功,输出目录:${paths.appPackageDev}`));
             }
         },
         err => {

@@ -46,7 +46,7 @@
                         {{name}}:"{{dev===true?name+'.js':name+'.min.js'}}",
                     }
                 })
-                mk.render('{{@rootApp}}', 'app')
+                mk.render('{{rootApp || name}}', 'app')
             /*})*/
         }
 
