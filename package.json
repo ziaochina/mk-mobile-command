@@ -1,6 +1,6 @@
 {
   "name": "mk-mobile-command",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "mk移动端脚手架",
   "license": "MIT",
   "bin": {
@@ -36,6 +36,7 @@
     "less": "*",
     "less-loader": "*",
     "mini-css-extract-plugin": "*",
+    "mk-mobile-sdk": "*",
     "optimize-css-assets-webpack-plugin": "*",
     "react": "*",
     "react-dev-utils": "*",
