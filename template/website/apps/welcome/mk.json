@@ -1,6 +1,6 @@
 {
     "name": "welcome",
-    "title": "test",
+    "title": "welcome",
     "apiPrefix": "www.www.com",
     "server": {
       "proxy": null,
