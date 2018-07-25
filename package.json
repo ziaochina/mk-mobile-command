@@ -1,6 +1,6 @@
 {
   "name": "mk-mobile-command",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "mk移动端脚手架",
   "license": "MIT",
   "bin": {
