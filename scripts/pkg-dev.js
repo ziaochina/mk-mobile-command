@@ -49,12 +49,6 @@ measureFileSizesBeforeBuild(paths.appPackageDev)
         let appHtmlPath = path.resolve(appDirectory, 'index.html')
         let html = fs.readFileSync(appHtmlPath, 'utf-8');
         let render = template.compile(html);
-
-        let apps = Object.keys(mkJson.dependencies).reduce((a, b) => {
-            a[b] = { asset: `${b}.js` }
-            return a
-        }, {})
-        apps[appJson.name] = { asset: appJson.name + '.js' }
         html = render({ ...mkJson, dev:true })
         fs.writeFileSync(path.resolve(paths.appPackageDev, 'index.html'), html);
 

@@ -43,6 +43,7 @@
                         {{each dependencies val key}}
                         {{key}}:"{{dev===true?key+'.js':key+'.min.js'}}",
                         {{/each}}
+                        {{}}
                         {{name}}:"{{dev===true?name+'.js':name+'.min.js'}}",
                     }
                 })
