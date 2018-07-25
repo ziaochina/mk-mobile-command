@@ -28,42 +28,34 @@ const measureFileSizesBeforeBuild =
 const appDirectory = fs.realpathSync(process.cwd());
 
 const appJson = require(paths.appPackageJson);
+const mkJson = require(path.join(appDirectory, 'mk.json'));
 
 // 检测必须的文件，不存在自动退出
 if (!checkRequiredFiles([paths.appIndexJs])) {
     process.exit(1);
 }
 
-measureFileSizesBeforeBuild(paths.appPackage)
+measureFileSizesBeforeBuild(paths.appPackageDev)
     .then(previousFileSizes => {
         //清空目录中文件
         fs.emptyDirSync(paths.appPackageDev);
         //开始build
         let ret = build(previousFileSizes);
-        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'dist', 'debug')
+        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-mobile-sdk', 'dist', 'debug')
         if (!fs.existsSync(paths.appPackageDev)) {
             fs.mkdirSync(paths.appPackageDev);
         }
         fs.copySync(libPath, paths.appPackageDev);
-        let ownHtmlPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'template', 'app', 'index-dev.html')
-        let appHtmlPath = path.resolve(appDirectory, 'template', 'index-dev.html')
-        let html = fs.existsSync(appHtmlPath) ? fs.readFileSync(appHtmlPath, 'utf-8') : fs.readFileSync(ownHtmlPath, 'utf-8');
-        let render = template.compile(html, { debug: true });
-        let htmlOption = appJson.htmlOption
-        html = render({
-            appName: (htmlOption && htmlOption.renderApp) || appJson.name,
-            title: appJson.description,
-            isMock: (htmlOption && htmlOption.isMock) || false,
-            token:  (htmlOption && htmlOption.token) || '',
-            preApp: (htmlOption && htmlOption.preApp && htmlOption.preApp.length > 0)
-                ? JSON.stringify(htmlOption.preApp)
-                : '',
-            app: JSON.stringify({
-                ...(htmlOption && htmlOption.app),
-                [appJson.name]: { asset: appJson.name }
-            }),
+        let appHtmlPath = path.resolve(appDirectory, 'index.html')
+        let html = fs.readFileSync(appHtmlPath, 'utf-8');
+        let render = template.compile(html);
 
-        });
+        let apps = Object.keys(mkJson.dependencies).reduce((a, b) => {
+            a[b] = { asset: `${b}.js` }
+            return a
+        }, {})
+        apps[appJson.name] = { asset: appJson.name + '.js' }
+        html = render({ ...mkJson, dev:true })
         fs.writeFileSync(path.resolve(paths.appPackageDev, 'index.html'), html);
 
         return ret

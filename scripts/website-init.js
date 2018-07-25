@@ -22,8 +22,8 @@ module.exports = function (
     websitePackage.dependencies = websitePackage.dependencies || {};
 
     websitePackage.scripts = {
-        'start': 'mk website-start',
-        'pkg': 'mk website-pkg'
+        'start': 'mkm website-start',
+        'pkg': 'mkm website-pkg'
     };
 
     fs.writeFileSync(

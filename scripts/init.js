@@ -23,10 +23,9 @@ module.exports = function (
   appPackage.dependencies = appPackage.dependencies || {};
 
   appPackage.scripts = {
-    'start': 'mk start',
-    'build': 'mk build',
-    'build-dev': 'mk build-dev',
-    'pkg': 'mk pkg'
+    'start': 'mkm start',
+    'build': 'mkm build',
+    'pkg': 'mkm pkg'
   };
 
   fs.writeFileSync(
@@ -111,7 +110,7 @@ module.exports = function (
   console.log('    编译应用.');
   console.log();
   console.log(
-    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`)
+    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}pkg`)
   );
   console.log('    打包应用.');
   console.log();

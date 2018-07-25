@@ -36,7 +36,7 @@ measureFileSizesBeforeBuild(paths.appPackage)
         //清空目录中文件
         fs.emptyDirSync(paths.appPackage);
 
-        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'dist', 'release')
+        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-mobile-sdk', 'dist', 'release')
 
         if (!fs.existsSync(paths.appPackage)) {
             console.log(paths.appPackage)
@@ -50,9 +50,8 @@ measureFileSizesBeforeBuild(paths.appPackage)
         spawn.sync('node', [require.resolve('./scan.js')], { stdio: 'inherit' });
 
 
-        let ownHtmlPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'template', 'app', 'index-dev.html')
         let appHtmlPath = path.resolve(appDirectory, 'index.html')
-        let html = fs.existsSync(appHtmlPath) ? fs.readFileSync(appHtmlPath, 'utf-8') : fs.readFileSync(ownHtmlPath, 'utf-8');
+        let html = fs.readFileSync(appHtmlPath, 'utf-8') 
         let render = template.compile(html);
         console.log(`正在拷贝依赖app编译结果`)
         let mkJson = JSON.parse(fs.readFileSync(path.join(appDirectory, 'mk.json'), 'utf-8') )
@@ -72,13 +71,7 @@ measureFileSizesBeforeBuild(paths.appPackage)
             a[b] = { asset: `${b}.min.js` }
             return a
         }, {})
-        html = render({
-            rootApp: mkJson.rootApp || appJson.name,
-            mkjs: 'mk.min.js',
-            requirejs: 'require.min.js',
-            title: appJson.description,
-            apps: JSON.stringify(apps),
-        });
+        html = render(mkJson);
         fs.writeFileSync(path.resolve(paths.appPackage, 'index.html'), html);
         console.log()
         console.log(chalk.green(`打包完成，目录:${paths.appPackage}\n`))

@@ -49,7 +49,7 @@ if (!checkRequiredFiles([paths.appIndexJs])) {
 */
 measureFileSizesBeforeBuild(paths.appPublic)
     .then(previousFileSizes => {
-        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'dist', 'debug')
+        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-mobile-sdk', 'dist', 'debug')
         if (!fs.existsSync(paths.appPublic)) {
             fs.mkdirSync(paths.appPublic);
         }
@@ -64,29 +64,11 @@ measureFileSizesBeforeBuild(paths.appPublic)
         spawn.sync('node',[require.resolve('./scan.js')],{ stdio: 'inherit' });
         spawn.sync('node',[require.resolve('./copy-local-dep.js')],{ stdio: 'inherit' });
 
-        let ownHtmlPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'template', 'app', 'index-dev.html')
         let appHtmlPath = path.resolve(appDirectory, 'index.html')
-        let html = fs.existsSync(appHtmlPath) ? fs.readFileSync(appHtmlPath, 'utf-8') : fs.readFileSync(ownHtmlPath, 'utf-8');
+        let html = fs.readFileSync(appHtmlPath, 'utf-8')
         let render = template.compile(html);
         let mkJson = JSON.parse(fs.readFileSync(path.join(appDirectory, 'mk.json'), 'utf-8') )
-        let apps = Object.keys(mkJson.dependencies).reduce((a, b) => {
-            //copy依赖app资源
-            if (mkJson.dependencies[b].indexOf('file:') != -1) {
-                let depPath = path.resolve(appDirectory, mkJson.dependencies[b].replace('file:', ''), 'build', 'dev')
-                if (fs.existsSync(depPath)) {
-                    fs.copySync(depPath, paths.appPublic);
-                }
-            }
-            a[b] = { asset: `${b}.js` }
-            return a
-        }, {})
-        html = render({
-            rootApp: mkJson.rootApp || appJson.name,
-            mkjs: 'mk.js',
-            requirejs: 'require.js',
-            title: appJson.description,
-            apps: JSON.stringify(apps),
-        });
+        html = render({...mkJson,dev:true});
         fs.writeFileSync(path.resolve(paths.appPublic, 'index.html'), html);
 
    

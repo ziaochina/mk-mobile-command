@@ -135,7 +135,7 @@ Object.defineProperty(exports,"__esModule",{value:true});var _mkMetaEngine=__web
 /* 5 */
 /***/ (function(module) {
 
-module.exports = {"name":"welcome","version":"1.0.0","license":"MIT","author":"monkey king","keywords":["mk","monkey king","react","redux","antd"],"repository":{"type":"git","url":"git+https://github.com/ziaochina/mk-command.git"},"dependencies":{"mk-command":"*","mk-sdk":"*"},"scripts":{"start":"mk start","build":"mk build","build-dev":"mk build-dev","pkg":"mk pkg"}};
+module.exports = {"name":"welcome","version":"1.0.0","license":"MIT","author":"monkey king","keywords":["mk","monkey king","react","redux","antd"],"repository":{"type":"git","url":"git+https://github.com/ziaochina/mk-command.git"},"dependencies":{"mk-command":"*","mk-sdk":"*"},"scripts":{"start":"mkm start","build":"mkm build","pkg":"mkm pkg"}};
 
 /***/ }),
 /* 6 */

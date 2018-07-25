@@ -36,7 +36,7 @@ measureFileSizesBeforeBuild(paths.appPackageDev)
         //清空目录中文件
         fs.emptyDirSync(paths.appPackageDev);
 
-        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'dist', 'debug')
+        let libPath = path.resolve(appDirectory, 'node_modules', 'mk-mobile-sdk', 'dist', 'debug')
 
         if (!fs.existsSync(paths.appPackageDev)) {
             console.log(paths.appPackageDev)
@@ -49,10 +49,8 @@ measureFileSizesBeforeBuild(paths.appPackageDev)
         const spawn = require('react-dev-utils/crossSpawn');
         spawn.sync('node', [require.resolve('./scan.js')], { stdio: 'inherit' });
 
-
-        let ownHtmlPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'template', 'app', 'index-dev.html')
         let appHtmlPath = path.resolve(appDirectory, 'index.html')
-        let html = fs.existsSync(appHtmlPath) ? fs.readFileSync(appHtmlPath, 'utf-8') : fs.readFileSync(ownHtmlPath, 'utf-8');
+        let html = fs.readFileSync(appHtmlPath, 'utf-8') 
         let render = template.compile(html);
         console.log(`正在拷贝依赖app编译结果`)
         let mkJson = JSON.parse(fs.readFileSync(path.join(appDirectory, 'mk.json'), 'utf-8') )
@@ -72,13 +70,7 @@ measureFileSizesBeforeBuild(paths.appPackageDev)
             a[b] = { asset: `${b}.js` }
             return a
         }, {})
-        html = render({
-            rootApp: mkJson.rootApp || appJson.name,
-            mkjs: 'mk.js',
-            requirejs: 'require.js',
-            title: appJson.description,
-            apps: JSON.stringify(apps),
-        });
+        html = render({...mkJson, dev:true});
         fs.writeFileSync(path.resolve(paths.appPackageDev, 'index.html'), html);
         console.log()
         console.log(chalk.green(`打包完成，目录:${paths.appPackageDev}\n`))

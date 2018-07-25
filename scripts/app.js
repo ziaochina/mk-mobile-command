@@ -22,7 +22,7 @@ if (typeof projectName === 'undefined') {
   console.error('请输入appName:');
   console.log();
   console.log('示例:');
-  console.log(`  mk app ${chalk.green('hello-world')}`);
+  console.log(`  mkm app ${chalk.green('hello-world')}`);
   console.log();
   process.exit(1);
 }
@@ -40,13 +40,14 @@ function createApp(name) {
 
   const packageJson = {
     name: appName,
+    description: appName,
     version: '1.0.0',
     license: 'MIT',
     author: '',
     keywords: ['mk', 'monkey king', 'react', 'redux', 'antd'],
     repository: {
       "type": "git",
-      "url": "git+https://github.com/ziaochina/mk-command.git"
+      "url": "git+https://github.com/ziaochina/mk-mobile-command.git"
     }
   };
 
@@ -54,6 +55,24 @@ function createApp(name) {
     path.join(root, 'package.json'),
     JSON.stringify(packageJson, null, 2)
   );
+
+  const mkJson = {
+    "name": appName,
+    "rootApp": appName,
+    "title": appName,
+    "apiPrefix": "www.www.com",
+    "server": {
+      "proxy": null,
+      "port": 8000
+    },
+    "dependencies": {}
+  }
+
+  fs.writeFileSync(
+    path.join(root, 'mk.json'),
+    JSON.stringify(mkJson, null, 2)
+  );
+
 
   const useYarn = true;
   const originalDirectory = process.cwd();
@@ -101,8 +120,8 @@ function run(
   appName,
   originalDirectory
 ) {
-  const packageToInstall = 'mk-command@*';
-  const allDependencies = ['mk-sdk@*', packageToInstall];
+  const packageToInstall = 'mk-mobile-command@*';
+  const allDependencies = ['mk-mobile-sdk@*', packageToInstall];
 
   console.log('正在安装依赖，可能需要几分钟...');
   getPackageName(packageToInstall)

@@ -22,7 +22,7 @@ if (typeof projectName === 'undefined') {
   console.error('请输入websiteName:');
   console.log();
   console.log('示例:');
-  console.log(`  mk website ${chalk.green('hello-world')}`);
+  console.log(`  mkm website ${chalk.green('hello-world')}`);
   console.log();
   process.exit(1);
 }
@@ -101,8 +101,8 @@ function run(
   appName,
   originalDirectory
 ) {
-  const packageToInstall = 'mk-command@*';
-  const allDependencies = ['mk-sdk@*', packageToInstall];
+  const packageToInstall = 'mk-mobile-command@*';
+  const allDependencies = ['mk-mobile-sdk@*', packageToInstall];
 
   console.log('正在安装依赖，可能需要几分钟...');
   getPackageName(packageToInstall)
