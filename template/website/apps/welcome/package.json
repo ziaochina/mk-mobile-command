@@ -1,5 +1,7 @@
 {
+    "isMKApp": true,
     "name": "welcome",
+    "description": "welcome",
     "version": "1.0.0",
     "license": "MIT",
     "author": "monkey king",
@@ -20,8 +22,12 @@
     },
     "scripts": {
       "start": "mk start",
-      "build": "mk build",
-      "build-dev": "mk build-dev",
+      "build": "mk build",      
       "pkg": "mk pkg"
-    }
+    },
+  "server": {
+    "proxy": null,
+    "port": 8000
+  },
+  "appDependencies":{}
   }
