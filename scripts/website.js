@@ -45,8 +45,6 @@ function createDir(root, name) {
     fs.ensureDirSync(name);
     //更换工作目录
     process.chdir(root);
-    console.log(`开始创建网站，目录： ${chalk.green(root)}.`);
-    console.log();
     resolve();
   })
 }
