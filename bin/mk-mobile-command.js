@@ -107,6 +107,41 @@ program
         s = run('website-pkg-dev', args);
         process.exit(s);
     })
+program
+    .command('install')
+    .action(function (...args) {
+        let s = run('install', args);
+        process.exit(s);
+    })
+
+program
+    .command('add')
+    .action(function (...args) {
+        let s = run('add', args);
+        process.exit(s);
+    })
+
+program
+    .command('remove')
+    .action(function (...args) {
+        let s = run('remove', args);
+        process.exit(s);
+    })
+
+program
+    .command('publish')
+    .action(function (...args){
+        let s = run('publish', args);
+        process.exit(s);
+    })
+
+program
+    .command('adduser')
+    .action(function (...args){
+        let s = run('adduser', args);
+        process.exit(s);
+    })
+
 
 program
     .command('*')

@@ -57,7 +57,7 @@ function createPackageJson(root, name) {
   console.log(`  ${chalk.bold('[2/5]')} 创建package.json文件...`)
   return new Promise((resolve, reject) => {
     const packageJson = {
-      isMKApp:true,
+      isMKMobileApp:true,
       name: name,
       description: name,
       version: '1.0.0',
@@ -69,9 +69,9 @@ function createPackageJson(root, name) {
         "url": "git+https://github.com/ziaochina/mk-command.git"
       },
       scripts: {
-        'start': 'mk start',
-        'build': 'mk build',
-        'pkg': 'mk pkg'
+        'start': 'mkm start',
+        'build': 'mkm build',
+        'pkg': 'mkm pkg'
       },
       dependencies: {
         "mk-mobile-command": '*',

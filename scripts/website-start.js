@@ -70,7 +70,7 @@ function createDir(publicPath) {
 
 function copyCoreLib(publicPath, appPath) {
     return new Promise((resolve, reject) => {
-        const coreLibPath = path.resolve(appPath, 'node_modules', 'mk-sdk', 'dist', 'debug');
+        const coreLibPath = path.resolve(appPath, 'node_modules', 'mk-mobile-sdk', 'dist', 'debug');
         fs.copySync(coreLibPath, publicPath);
         resolve();
     })
@@ -79,7 +79,7 @@ function copyCoreLib(publicPath, appPath) {
 function scanAppDep(appPath) {
     return new Promise((resolve, reject) => {
         spawn.sync('node',
-            [path.resolve(appPath, 'node_modules', 'mk-command', 'scripts', 'scan.js')],
+            [path.resolve(appPath, 'node_modules', 'mk-mobile-command', 'scripts', 'scan.js')],
             { stdio: 'inherit' }
         );
         resolve()
@@ -89,7 +89,7 @@ function scanAppDep(appPath) {
 function copyLocalDep(appPath) {
     return new Promise((resolve, reject) => {
         spawn.sync('node',
-            [path.resolve(appPath, 'node_modules', 'mk-command', 'scripts', 'copy-local-dep.js')],
+            [path.resolve(appPath, 'node_modules', 'mk-mobile-command', 'scripts', 'copy-local-dep.js')],
             { stdio: 'inherit' }
         );
         resolve();
@@ -99,7 +99,7 @@ function copyLocalDep(appPath) {
 function copyRemoteDep(appPath) {
     return new Promise((resolve, reject) => {
         spawn.sync('node',
-            [path.resolve(appPath, 'node_modules', 'mk-command', 'scripts', 'copy-remote-dep.js')],
+            [path.resolve(appPath, 'node_modules', 'mk-mobile-command', 'scripts', 'copy-remote-dep.js')],
             { stdio: 'inherit' }
         );
         resolve();

@@ -44,7 +44,7 @@ function scanLocalApps(dir) {
     if (stats.isFile()) {
       if (fileName === 'package.json') {
         let subAppJson = require(path.join(dir, 'package.json'))
-        if (subAppJson.isMKApp == true) {
+        if (subAppJson.isMKMobileApp == true) {
           let subDir = path.relative(paths.appPath, dir)
           appDependencies[subAppJson.name] = {
             from: 'local',
@@ -62,7 +62,7 @@ function scanLocalApps(dir) {
 function scanRemoteApps() {
   Object.keys(packageJson.dependencies).forEach(k => {
     let json = JSON.parse(fs.readFileSync(path.join(paths.appSrc, 'node_modules', k, 'package.json'), 'utf-8'))
-    if (json.isMKApp) {
+    if (json.isMKMobileApp) {
       appDependencies[json.name] = {
         from: 'MK',
         options: {}

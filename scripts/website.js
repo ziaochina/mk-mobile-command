@@ -56,7 +56,7 @@ function createPackageJson(root, websiteName) {
   console.log(`  ${chalk.bold('[2/5]')} 创建package.json文件...`)
   return new Promise((resolve, reject) => {
     const packageJson = {
-      isMKWebsite: true,
+      isMKMobileWebsite: true,
       name: websiteName,
       description: websiteName,
       version: '1.0.0',
@@ -68,12 +68,12 @@ function createPackageJson(root, websiteName) {
         "url": "git+https://github.com/ziaochina/mk-command.git"
       },
       scripts: {
-        'start': 'mk website-start',
-        'pkg': 'mk website-pkg'
+        'start': 'mkm website-start',
+        'pkg': 'mkm website-pkg'
       },
       dependencies: {
-        "mk-command": '*',
-        "mk-sdk": '*'
+        "mk-mobile-command": '*',
+        "mk-mobile-sdk": '*'
       }
     };
 
@@ -119,7 +119,7 @@ function init(name, root) {
     const initScriptPath = path.resolve(
       process.cwd(),
       'node_modules',
-      'mk-command',
+      'mk-mobile-command',
       'scripts',
       'website-init.js'
     );

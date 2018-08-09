@@ -83,7 +83,7 @@ function build() {
 
 function copyCoreLib() {
     console.log(`  ${chalk.bold('[3/7]')} 复制sdk...`)
-    let libPath = path.resolve(appDirectory, 'node_modules', 'mk-sdk', 'dist', 'debug')
+    let libPath = path.resolve(appDirectory, 'node_modules', 'mk-mobile-sdk', 'dist', 'debug')
     if (!fs.existsSync(paths.appPackageDev)) {
         fs.mkdirSync(paths.appPackageDev);
     }
@@ -94,7 +94,7 @@ function scanAppDep(appPath) {
     console.log(`  ${chalk.bold('[4/7]')} 扫描依赖app...`)
     return new Promise((resolve, reject) => {
         spawn.sync('node',
-            [path.resolve(appPath, 'node_modules', 'mk-command', 'scripts', 'scan.js')],
+            [path.resolve(appPath, 'node_modules', 'mk-mobile-command', 'scripts', 'scan.js')],
             { stdio: 'inherit' }
         );
         resolve()
@@ -105,7 +105,7 @@ function copyLocalDep(appPath) {
     console.log(`  ${chalk.bold('[5/7]')} 复制本地依赖app...`)
     return new Promise((resolve, reject) => {
         spawn.sync('node',
-            [path.resolve(appPath, 'node_modules', 'mk-command', 'scripts', 'copy-local-dep.js'), '', paths.appPackageDev],
+            [path.resolve(appPath, 'node_modules', 'mk-mobile-command', 'scripts', 'copy-local-dep.js'), '', paths.appPackageDev],
             { stdio: 'inherit' }
         );
         resolve();
@@ -117,7 +117,7 @@ function copyRemoteDep(appPath) {
     console.log(`  ${chalk.bold('[6/7]')} 复制远程依赖app...`)
     return new Promise((resolve, reject) => {
         spawn.sync('node',
-            [path.resolve(appPath, 'node_modules', 'mk-command', 'scripts', 'copy-remote-dep.js'),  '', paths.appPackageDev],
+            [path.resolve(appPath, 'node_modules', 'mk-mobile-command', 'scripts', 'copy-remote-dep.js'),  '', paths.appPackageDev],
             { stdio: 'inherit' }
         );
         resolve();
