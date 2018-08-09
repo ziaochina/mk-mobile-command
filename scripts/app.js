@@ -26,7 +26,7 @@ if (typeof projectName === 'undefined') {
   console.log();
   process.exit(1);
 }
-
+console.log(chalk.green(`开始创建app...`));
 createApp(projectName);
 
 function createApp(name) {
@@ -36,24 +36,25 @@ function createApp(name) {
 
   createDir(root, appName)
     .then(() => createPackageJson(root, appName))
+    .then(() => createMKJson(root, appName))
     .then(() => install())
     .then(() => init(appName, root))
     .catch(reason => exceptionHandler(reason, root))
 }
 
-function createDir(root,name) {
+function createDir(root, name) {
+  console.log(`  ${chalk.bold('[1/5]')} 创建目录:${root}...`)
   return new Promise((resolve, reject) => {
     fs.ensureDirSync(name);
     //更换工作目录
     process.chdir(root);
-    console.log(`开始创建应用，目录： ${chalk.green(root)}.`);
-    console.log();
     resolve();
   })
 }
 
 
 function createPackageJson(root, name) {
+  console.log(`  ${chalk.bold('[2/5]')} 创建package.json文件...`)
   return new Promise((resolve, reject) => {
     const packageJson = {
       isMKApp:true,
@@ -67,18 +68,15 @@ function createPackageJson(root, name) {
         "type": "git",
         "url": "git+https://github.com/ziaochina/mk-command.git"
       },
-      html: {
-        "apiPrefix": "www.www.com"
-      },
-      server: {
-        "proxy": null,
-        "port": 8000
+      scripts: {
+        'start': 'mk start',
+        'build': 'mk build',
+        'pkg': 'mk pkg'
       },
       dependencies: {
         "mk-mobile-command": '*',
         "mk-mobile-sdk": '*'
-      },
-      appDependencies: {}
+      }
     };
 
     fs.writeFileSync(
@@ -89,8 +87,28 @@ function createPackageJson(root, name) {
   })
 }
 
+function createMKJson(root, name) {
+  console.log(`  ${chalk.bold('[3/5]')} 创建mk.json文件...`)
+  return new Promise((resolve, reject) => {
+    const mkJson = {
+      server: {
+        "proxy": null,
+        "port": 8000
+      },
+      html: {},
+      dependencies: {}
+    };
+
+    fs.writeFileSync(
+      path.join(root, 'mk.json'),
+      JSON.stringify(mkJson, null, 2)
+    );
+    resolve()
+  })
+}
 
 function install() {
+  console.log(`  ${chalk.bold('[4/5]')} 执行安装依赖...`)
   return new Promise((resolve, reject) => {
    
     spawn.sync('node', [require.resolve('./install.js')], { stdio: 'inherit' });
@@ -99,6 +117,7 @@ function install() {
 }
 function init(name, root) {
   return new Promise((resolve, reject) => {
+    console.log(`  ${chalk.bold('[5/5]')} 初始化应用...`)
     const initScriptPath = path.resolve(
       process.cwd(),
       'node_modules',
