@@ -12,6 +12,7 @@ const dns = require('dns');
 const tmp = require('tmp');
 const unpack = require('tar-pack').unpack;
 const url = require('url');
+const consts = require('../config/consts')
 const hyperquest = require('hyperquest');
 const envinfo = require('envinfo');
 const packageJson = require('../package.json');
@@ -37,7 +38,7 @@ function remove(root, isOnline) {
         let args;
 
         command = 'yarnpkg';
-        args = ['remove', appName, '--registry', 'http://localhost:4873'];
+        args = ['remove', appName, '--registry', consts.mkServerUrl];
         if (!isOnline) {
             args.push('--offline');
         }

@@ -5,6 +5,7 @@ const execSync = require('child_process').execSync;
 const spawn = require('cross-spawn');
 const dns = require('dns');
 const url = require('url');
+const consts = require('../config/consts')
 
 
 checkIfOnline()
@@ -17,7 +18,7 @@ function adduser(isOnline) {
         let args;
 
         command = 'npm';
-        args = ['adduser', '--registry', 'http://localhost:4873'];
+        args = ['adduser', '--registry', consts.mkServerUrl];
         if (!isOnline) {
             args.push('--offline');
         }
